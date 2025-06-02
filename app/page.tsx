@@ -12,26 +12,26 @@ const Page = () => {
       <h1 className="text-2xl underline">Popular Companions</h1>
       <section className='home-section'>
         <CompanionCard 
-        id="123"
-        name="Mohammed"
-        topic="Science"
+        id="1"
+        name="My English Companion"
+        topic="Articulations"
         subject="English Literature"
         duration={45}
-        color="#A45"
+        color="#A433"
         />
            <CompanionCard 
-        id="123"
-        name="Mohammed"
-        topic="sicenc"
-        subject="Maths"
+        id="2"
+        name="My Science Companion"
+        topic="Human Anatomy"
+        subject="Biology"
         duration={45}
         color="#FF4F"
         />
            <CompanionCard 
-        id="123"
-        name="Mohammed"
-        topic="Science"
-        subject="excercise"
+        id="3"
+        name="My Coding Companion"
+        topic="Server and client Component"
+        subject="React Js"
         duration={45}
         color="#F4FF"
         />
