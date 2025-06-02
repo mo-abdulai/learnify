@@ -72,7 +72,7 @@ learnify/
 
 1. Clone this repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/mo-abdulai/learnify.git
    ```
 2. Navigate to the project directory:
    ```bash
