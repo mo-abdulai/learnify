@@ -22,27 +22,27 @@ const CompanionSession = async ({ params }: CompanionSessionProps) => {
         <div className="flex items-cneter gap-2">
           <div
             className="size-[72px] flex items-center justify-center rounded-lg max-md:hidden"
-            style={{ backgroundColor: getSubjectColor(companion.subject) }}
+            style={{ backgroundColor: getSubjectColor(subject) }}
           >
             <Image
-              src={`/icons/${companion.subject}.svg`}
-              alt={`${companion.subject} icon`}
+              src={`/icons/${subject}.svg`}
+              alt={`${subject} icon`}
               width={35}
               height={35}
             />
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <p className="font-bold text-2xl">{companion.name}</p>
+              <p className="font-bold text-2xl">{name}</p>
               <div className="subject-badge max-sm:hidden">
-                {companion.subject}
+                {subject}
               </div>
             </div>
-            <p>{companion.topic}</p>
+            <p>{topic}</p>
           </div>
         </div>
         <div className="items-start text-2xl max-md:hidden">
-          {companion.duration} minutes
+          {duration} minutes
         </div>
       </article>
       <CompanionComponent {...companion} companionId={id}  userName={user.firstName!} userImage={user.imageUrl!}/>
