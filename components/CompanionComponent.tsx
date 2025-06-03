@@ -86,7 +86,7 @@ const CompanionComponent = ({
       serverMessages: [],
     };
 
-    // @ts-expect-error Lottie type mismatch with ref, safe to ignore for now
+    // @ts-expect-error: Lottie type mismatch with ref, safe to ignore for now
     vapi.start(configureAssistant(voice, style), assistantOverrides);
   };
   const handleDisconnect = async () => {
