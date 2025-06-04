@@ -23,7 +23,7 @@ const CompanionComponent = ({
   userImage,
   style,
   voice,
-}) => {
+}: CompanionComponentProps) => {
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
