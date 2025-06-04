@@ -7,6 +7,7 @@ import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import soundwaves from "@/constants/soundwaves.json";
 import Image from "next/image";
 import { Variable } from "lucide-react";
+import { addToSessionHistory } from "@/lib/actions/companion.actions";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -28,6 +29,7 @@ const CompanionComponent = ({
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const lottieRef = React.useRef<LottieRefCurrentProps>(null);
+  const [messages, setMessages] = useState<SavedMessage[]>([]);
   useEffect(() => {
     if (lottieRef) {
       if (isSpeaking) {
@@ -45,9 +47,16 @@ const CompanionComponent = ({
 
     const onCallEnd = () => {
       setCallStatus(CallStatus.FINISHED);
+      addToSessionHistory(companionId)
+
     };
 
-    const onMessage = () => {};
+    const onMessage = (message: Message) => {
+      if (message.type === "transcript" && message.transcriptType === "final") {
+        const newMessage = { role: message.role, content: message.transcript };
+        setMessages((prev) => [newMessage, ...prev]);
+      }
+    };
 
     const onSpeechStart = () => setIsSpeaking(true);
     const onSpeechEnd = () => setIsSpeaking(false);
@@ -75,13 +84,18 @@ const CompanionComponent = ({
     const isMuted = vapi.isMuted();
     vapi.setMuted(!isMuted);
     setIsMuted(!isMuted);
+
+    if (!isMuted) {
+      const audio = new Audio("/sounds/mic-off.mp3");
+      audio.play().catch((err) => console.error("Sound failed:", err));
+    }
   };
 
   const handleCall = async () => {
     setCallStatus(CallStatus.CONNECTING);
 
     const assistantOverrides = {
-      variableValues: { subject, topic, style },
+      variableValues: { userName, subject, topic, style },
       clientMessages: ["transcript"],
       serverMessages: [],
     };
@@ -148,7 +162,7 @@ const CompanionComponent = ({
             />
             <p className="font-bold text-2xl">{userName}</p>
           </div>
-          <button className="btn-mic" onClick={toggleMicrophone}>
+          <button className="btn-mic" onClick={toggleMicrophone} disabled={callStatus !== CallStatus.ACTIVE}>
             <Image
               src={isMuted ? "/icons/mic-off.svg" : "/icons/mic-on.svg"}
               alt="mic"
@@ -178,7 +192,27 @@ const CompanionComponent = ({
         </div>
       </section>
       <section className="transcript">
-        <div className="transcript-message no-scrollbar">MESSAGE</div>
+        <div className="transcript-message no-scrollbar">
+          {messages.map((message, index) => {
+            if (message.role === "assistant") {
+              return (
+                <p key={index} className="max-sm:tex-sm">
+                  {name.split(" ")[0].replace("/[.,]/g", "")} :{" "}
+                  {message.content}
+                </p>
+              );
+            } else {
+              return (
+                <p
+                  key={index}
+                  className="text-primary max-sm:text-sm"
+                >
+                  {userName} : {message.content}
+                </p>
+              );
+            }
+          })}
+        </div>
         <div className="transcript-fade" />
       </section>
     </section>
