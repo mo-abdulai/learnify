@@ -40,6 +40,9 @@
   --sidebar-ring: oklch(0.708 0 0);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+  --surface: #ffffff;
+  --surface-contrast: #0f0f0f;
+  --border-strong: #0f0f0f;
 }
 
 @theme inline {
@@ -90,37 +93,42 @@ body {
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --primary: #f97316;
+  --primary-foreground: #0b0c10;
+  --cta: #161824;
+  --cta-gold: #f8d24a;
+  --card: #0f172a;
+  --card-foreground: #e2e8f0;
+  --popover: #0f172a;
+  --popover-foreground: #e2e8f0;
+  --secondary: #111827;
+  --secondary-foreground: #e2e8f0;
+  --muted: #1f2937;
+  --muted-foreground: #cbd5e1;
+  --accent: #1f2937;
+  --accent-foreground: #e2e8f0;
+  --destructive: #7f1d1d;
+  --border: #1f2937;
+  --input: #1f2937;
+  --ring: #334155;
+  --chart-1: #f97316;
+  --chart-2: #22c55e;
+  --chart-3: #38bdf8;
+  --chart-4: #a855f7;
+  --chart-5: #fbbf24;
+  --sidebar: #0b0c10;
+  --sidebar-foreground: #e2e8f0;
+  --sidebar-primary: #f97316;
+  --sidebar-primary-foreground: #0b0c10;
+  --sidebar-accent: #1f2937;
+  --sidebar-accent-foreground: #e2e8f0;
+  --sidebar-border: #1e2533;
+  --sidebar-ring: #334155;
+  --background: #0b0c10;
+  --foreground: #e5e7eb;
+  --surface: #111827;
+  --surface-contrast: #e2e8f0;
+  --border-strong: #2f3342;
 }
 
 @layer base {
@@ -129,6 +137,9 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+    background-color: var(--background);
+    color: var(--foreground);
+    transition: background-color 200ms ease, color 200ms ease;
   }
   main {
     @apply mx-auto px-14 flex flex-col gap-8 bg-background h-full max-w-[1400px] pt-10 max-sm:px-2;
@@ -147,36 +158,56 @@ body {
   }
   .companion-card {
     @apply flex flex-col rounded-4xl border border-black px-4 py-4 gap-5 w-full min-lg:max-w-[410px] justify-between;
+    background: var(--surface);
+    border-color: var(--border-strong);
+    color: var(--foreground);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
   }
   .subject-badge {
     @apply bg-black text-white rounded-4xl text-sm px-2 py-1 capitalize;
   }
   .companion-bookmark {
     @apply px-2 bg-black rounded-4xl flex items-center h-full aspect-square cursor-pointer;
+    background: var(--surface-contrast);
   }
   .input {
     @apply !border-black !bg-white focus-visible:!ring-0 focus-visible:!border-black !w-full;
+    background: var(--surface) !important;
+    border-color: var(--border-strong) !important;
+    color: var(--foreground);
   }
   .rounded-border {
     @apply rounded-4xl border border-black;
+    border-color: var(--border-strong);
   }
   .cta-section {
     @apply bg-cta text-white rounded-4xl px-7 py-10 flex flex-col items-center text-center gap-5 w-1/3 max-lg:w-1/2 max-md:w-full;
+    background: var(--cta);
   }
   .cta-badge {
     @apply bg-cta-gold rounded-4xl px-3 py-1.5 text-black;
   }
   .btn-primary {
     @apply bg-primary text-white rounded-xl cursor-pointer px-4 py-2 flex items-center gap-2;
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
   .navbar {
     @apply flex items-center justify-between mx-auto w-full px-14 py-4 bg-white max-sm:px-4;
+    background: var(--surface);
+    color: var(--foreground);
+    /* border-bottom: 1px solid var(--border-strong); */
   }
   .btn-signin {
     @apply border border-black rounded-4xl px-4 py-2.5 text-sm font-semibold flex items-center gap-2 cursor-pointer;
+    border-color: var(--border-strong);
+    color: var(--foreground);
   }
   .companion-list {
     @apply rounded-4xl border border-black px-7 pt-7 pb-10 max-lg:w-full bg-white;
+    background: var(--surface);
+    border-color: var(--border-strong);
+    color: var(--foreground);
   }
   .companion-limit {
     @apply items-center justify-center flex flex-col gap-4 w-full min-2xl:w-1/2 pt-20 text-center;
@@ -202,6 +233,8 @@ body {
 
   .btn-mic {
     @apply border-2 border-black rounded-lg flex flex-col gap-2 items-center py-8 max-sm:py-2 cursor-pointer w-full;
+    border-color: var(--border-strong);
+    color: var(--foreground);
   }
 
   .transcript {
@@ -212,6 +245,30 @@ body {
   }
   .transcript-fade {
     @apply pointer-events-none absolute bottom-0 left-0 right-0 h-40 max-sm:h-20 bg-gradient-to-t from-background via-background/90 to-transparent z-10;
+  }
+
+  .sentry-feedback-btn {
+    @apply fixed bottom-4 right-4 z-[10000] text-white rounded-full px-4 py-2 shadow-lg hover:opacity-90 transition;
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 9999px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--foreground);
+    transition: transform 150ms ease, opacity 150ms ease, background-color 150ms ease;
+  }
+
+  .theme-toggle:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
   }
 }
 
