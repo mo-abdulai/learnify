@@ -31,7 +31,7 @@ const Page = async () => {
       <section className="home-section">
         <CompanionList
           title="Recently Completed"
-          companions={recentSessionsCompanions}
+          companions={recentSessionsCompanions ?? []}
           classNames="w-2/3 max-lg:w-full"
         />
         <Cta />
