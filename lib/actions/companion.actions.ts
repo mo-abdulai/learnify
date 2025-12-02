@@ -94,7 +94,7 @@ export const getRecentSessions = async (limit = 10) => {
       return [];
     }
 
-    return data.map(({ companions }) => companions);
+    return data?.map(({ companions }) => companions);
   } catch (error) {
     console.error("Unexpected error while fetching recent sessions", error);
     return [];
@@ -112,7 +112,7 @@ export const getUserSessions = async (userId: string, limit = 10) => {
 
   if (error) throw new Error(error.message);
 
-  return data.map(({ companions }) => companions);
+  return data?.map(({ companions }) => companions);
 };
 
 export const getUserCompanions = async (userId: string) => {
