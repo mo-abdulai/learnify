@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider appearance={{ variables: {colorPrimary: '#fe5933' }}} publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
-      <html lang="en">
+      <html lang="en" className="dark">
         <body className={`${bricolage.variable} antialiased`}>
         
           <Navbar />
