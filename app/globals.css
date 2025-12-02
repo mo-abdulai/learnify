@@ -129,6 +129,9 @@ body {
   --surface: #111827;
   --surface-contrast: #e2e8f0;
   --border-strong: #2f3342;
+
+  /* Override per-card accent in dark mode to use neutral surface */
+  --card-bg: var(--card);
 }
 
 @layer base {
@@ -157,18 +160,26 @@ body {
     @apply flex flex-wrap gap-4 w-full max-md:justify-center;
   }
   .companion-card {
-    @apply flex flex-col rounded-4xl border border-black px-4 py-4 gap-5 w-full min-lg:max-w-[410px] justify-between;
+    @apply flex flex-col rounded-4xl border px-4 py-4 gap-5 w-full min-lg:max-w-[410px] justify-between;
+    background: var(--card-bg, var(--card));
+    color: var(--card-foreground);
+    border-color: var(--border);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+  }
+  .dark .companion-card {
     background: var(--surface);
     border-color: var(--border-strong);
-    color: var(--foreground);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32);
   }
   .subject-badge {
-    @apply bg-black text-white rounded-4xl text-sm px-2 py-1 capitalize;
+    @apply rounded-4xl text-sm px-2 py-1 capitalize;
+    background: var(--card-foreground);
+    color: var(--card);
   }
   .companion-bookmark {
-    @apply px-2 bg-black rounded-4xl flex items-center h-full aspect-square cursor-pointer;
-    background: var(--surface-contrast);
+    @apply px-2 rounded-4xl flex items-center h-full aspect-square cursor-pointer;
+    background: var(--card-foreground);
+    color: var(--card);
   }
   .input {
     @apply !border-black !bg-white focus-visible:!ring-0 focus-visible:!border-black !w-full;

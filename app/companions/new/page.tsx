@@ -27,8 +27,8 @@ const NewCompanion = async () => {
             width={360}
           />
           <div className="cta-badge">Upgrade your plan</div>
-          <h1> You've Reached Your Limits</h1>
-          <p>You've reached your companion limits. Upgrade to creat more companions and premium features</p>
+          <h1> You&apos;ve Reached Your Limits</h1>
+          <p>You&apos;ve reached your companion limits. Upgrade to creat more companions and premium features</p>
           <Link href="/subscription" className="btn-primary w-full justify-center"> Upgrade My Plan</Link>
         </article>
       )}

@@ -25,7 +25,7 @@ const Navbar = () => {
 
       <div className="flex items-center gap-8">
         <NavItems />
-        <ThemeToggle />
+        
         <SignedOut>
 
             <SignInButton>
@@ -35,6 +35,7 @@ const Navbar = () => {
         <SignedIn>
           <UserButton />
         </SignedIn>
+        <ThemeToggle />
       </div>
     </nav>
   )
