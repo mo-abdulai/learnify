@@ -9,6 +9,8 @@ interface CompanionCardProps {
   subject: string;
   duration: number;
   color: string;
+  launchHref?: string;
+  launchLabel?: string;
 }
 const CompanionCard = ({
   id,
@@ -17,6 +19,8 @@ const CompanionCard = ({
   subject,
   duration,
   color,
+  launchHref = `/companions/${id}`,
+  launchLabel = "Launch Lesson",
 }: CompanionCardProps) => {
   return (
     <article
@@ -47,8 +51,8 @@ const CompanionCard = ({
         />
         <p className="texsm">{duration} minutes</p>
       </div>
-      <Link href={`/companions/${id}`} className="w-full">
-        <button className="btn-primary w-full justify-center">Launch Lesson</button>
+      <Link href={launchHref} className="btn-primary w-full justify-center">
+        {launchLabel}
       </Link>
     </article>
   );

@@ -8,18 +8,26 @@ import {
     SelectValue,
 } from "./ui/select";
 import { subjects } from "@/constants";
-import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { formUrlQuery, removeKeysFromUrlQuery } from "@jsmastery/utils";
 
 const SubjectFilter = () => {
+    const pathname = usePathname();
     const router = useRouter();
     const searchParams = useSearchParams();
-    const query = searchParams.get("subject") || "";
+    const query = searchParams.get("subject") || "all";
 
     const [subject, setSubject] = useState(query);
 
     useEffect(() => {
+        setSubject(query);
+    }, [query]);
+
+    useEffect(() => {
+        if (pathname !== "/companions") return;
+        const currentSubject = searchParams.get("subject") || "all";
+        if (subject === currentSubject) return;
+
         let newUrl = "";
         if (subject === "all") {
             newUrl = removeKeysFromUrlQuery({
@@ -33,8 +41,8 @@ const SubjectFilter = () => {
                 value: subject,
             });
         }
-        router.push(newUrl, { scroll: false });
-    }, [subject]);
+        router.replace(newUrl, { scroll: false });
+    }, [subject, searchParams, router, pathname]);
 
     return (
         <div className="w-full max-w-xs">

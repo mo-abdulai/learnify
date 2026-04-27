@@ -16,11 +16,15 @@ interface CompanionaListProps {
   title: string;
   companions: Companion[];
   classNames?: string;
+  itemHref?: string;
+  getItemHref?: (id: string) => string;
 }
 const CompanionList = ({
   title,
   companions,
   classNames,
+  itemHref,
+  getItemHref,
 }: CompanionaListProps) => {
   return (
     <article className={cn("companion-list", classNames)}>
@@ -34,10 +38,10 @@ const CompanionList = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {companions?.map(({ id, subject, name, topic, duration }) => (
-            <TableRow key={id}>
+          {companions?.map(({ id, subject, name, topic, duration }, index) => (
+            <TableRow key={`${id}-${index}`}>
               <TableCell>
-                <Link href={`/companions/${id}`}>
+                <Link href={getItemHref ? getItemHref(id) : itemHref ?? `/companions/${id}`}>
                   <div className="items-center flex gap-2">
                     <div
                       className="size-[72px] flex items-center justify-center rounded-lg max-md:hidden"
