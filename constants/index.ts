@@ -71,3 +71,74 @@ export const recentSessions = [
     color: "#C8FFDF",
   },
 ];
+
+type GuestCompanionTemplate = CreateCompanion & {
+  templateId: string;
+};
+
+export const guestCompanionTemplates: GuestCompanionTemplate[] = [
+  {
+    templateId: "science-neural-network",
+    name: "Neura the Brainy Explorer",
+    subject: "science",
+    topic: "Neural Network of the Brain",
+    duration: 45,
+    voice: "female",
+    style: "casual",
+  },
+  {
+    templateId: "maths-derivatives-integrals",
+    name: "Countsy the Number Wizard",
+    subject: "maths",
+    topic: "Derivatives & Integrals",
+    duration: 30,
+    voice: "male",
+    style: "formal",
+  },
+  {
+    templateId: "language-english-literature",
+    name: "Verba the Vocabulary Builder",
+    subject: "language",
+    topic: "English Literature",
+    duration: 30,
+    voice: "female",
+    style: "formal",
+  },
+  {
+    templateId: "coding-if-else",
+    name: "Codey the Logic Hacker",
+    subject: "coding",
+    topic: "Intro to If-Else Statements",
+    duration: 45,
+    voice: "male",
+    style: "casual",
+  },
+  {
+    templateId: "history-world-wars",
+    name: "Memo, the Memory Keeper",
+    subject: "history",
+    topic: "World Wars: Causes & Consequences",
+    duration: 15,
+    voice: "female",
+    style: "formal",
+  },
+  {
+    templateId: "economics-supply-demand",
+    name: "The Market Maestro",
+    subject: "economics",
+    topic: "The Basics of Supply & Demand",
+    duration: 10,
+    voice: "male",
+    style: "formal",
+  },
+];
+
+export const defaultCompanions = guestCompanionTemplates.map(
+  ({ templateId, ...template }) => ({
+    id: templateId,
+    ...template,
+  })
+);
+
+export const getGuestCompanionTemplate = (templateId: string) =>
+  guestCompanionTemplates.find((template) => template.templateId === templateId);

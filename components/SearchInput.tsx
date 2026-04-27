@@ -8,36 +8,41 @@ const SearchInput = () => {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const query = searchParams.get("topiċ") || "";
+  const query = searchParams.get("topic") || "";
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(query);
 
   useEffect(() => {
+    setSearchQuery(query);
+  }, [query]);
 
+  useEffect(() => {
     const delayBounceFn = setTimeout(() => {
+      const nextTopic = searchQuery.trim();
+      const currentTopic = query.trim();
 
-        if (searchQuery) {
-      const newUrl = formUrlQuery({
-        params: searchParams.toString(),
-        key: "topic",
-        value: searchQuery,
-      });
+      if (nextTopic === currentTopic) return;
 
-      router.push(newUrl, { scroll: false });
-    } else {
-     if(pathname === '/companions'){
-         const newUrl = removeKeysFromUrlQuery({
-        params: searchParams.toString(),
-        keysToRemove: ["topic"],
-      });
+      if (nextTopic) {
+        const newUrl = formUrlQuery({
+          params: searchParams.toString(),
+          key: "topic",
+          value: nextTopic,
+        });
 
-      router.push(newUrl, { scroll: false });
-     }
-    }
-        
-    }, 500)
+        router.replace(newUrl, { scroll: false });
+      } else if (pathname === "/companions") {
+        const newUrl = removeKeysFromUrlQuery({
+          params: searchParams.toString(),
+          keysToRemove: ["topic"],
+        });
 
-  }, [searchQuery, searchParams, router, pathname]);
+        router.replace(newUrl, { scroll: false });
+      }
+    }, 500);
+
+    return () => clearTimeout(delayBounceFn);
+  }, [searchQuery, query, searchParams, router, pathname]);
 
   return (
     <div className="relative w-full max-w-md">

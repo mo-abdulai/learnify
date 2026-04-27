@@ -11,11 +11,13 @@ interface CompanionSessionProps {
 }
 const CompanionSession = async ({ params }: CompanionSessionProps) => {
   const { id } = await params;
-  const companion = await getCompanion(id);
-  const { name, title, topic, duration, subject } = companion
   const user = await currentUser();
-  if (!user) redirect("/sign-in");
+  if (!user) redirect(`/sign-in?redirect_url=/companions/${id}`);
+
+  const companion = await getCompanion(id);
   if (!companion) redirect("/companions");
+  const { name, topic, duration, subject } = companion;
+
   return (
     <main>
       <article className="flex rounded-border justify-between p-6 max-md:flex-col">
